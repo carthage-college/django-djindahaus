@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <meta charset="utf-8">
+ <title></title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="">
+ <meta name="keywords" content="">
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" rel="stylesheet">
+ <link href="https://www.carthage.edu/static/vendor/bootstrap-admin4/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+ <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+ <link href="{% static 'css/circle.css' %}" rel="stylesheet">
+ <style>
+ .list-group-item {padding: 0 1.75rem 0 1.25rem;}
+ .domain-pids {display:inline-block;width:42px;margin-top:3px;}
+ .domain-name {font-size: 2em;}
+ </style>
+</head>
+<body>
+<div id="app" class="row">
+  <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row list-group">
+    <template v-for="(domain) in results">
+      <template v-if="domain.active">
+        <div class="domain-name list-group-item list-group-item-action">
+          [[ domain.name ]]
+          <div :class="'c100 small float-right p' + domain.capacity">
+            <span>[[ domain.pids ]]</span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template v-if="domain.areas">
+        <template v-for="(area) in domain.areas">
+          <div class="domain-name list-group-item list-group-item-action">
+            <template v-if="domain.active">
+            <span class="ml-2">
+              <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </template>
+            <template v-else>
+            <span>
+            </template>
+              [[ area.name ]]
+            </span>
+            <div :class="'c100 small float-right p' + domain.capacity">
+              <span>[[ area.pids ]]</span>
+              <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </template>
+    </template>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.col-* -->
+</div>
+<!-- /#app -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+<script src="{% static 'js/vueApp.js' %}"></script>
+</body>
+</html>

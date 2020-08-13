@@ -1,0 +1,18 @@
+{
+  "lang": "en",
+  "background_color": "#3ab0c8",
+  "name": "Carthage IndaHaus",
+  "short_name": "IndaHaus",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+
+    {
+      "src": "https://www.carthage.edu/images/icons/favicon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait"
+}
+
