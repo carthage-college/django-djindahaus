@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""API views."""
+"""All views."""
 
 import datetime
 import requests

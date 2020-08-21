@@ -57,8 +57,8 @@ urlpatterns = [
         'cache/<str:ctype>/clear/', views.clear_cache, name='clear_cache',
     ),
     # rest
-    #path('clients/all/', api.spa, name='spa_json'),
-    path('clients/<str:domain>/', api.clients, name='clients_api'),
+    #path('clients/all/', views.spa, name='spa_json'),
+    path('clients/<str:domain>/', views.home, name='clients_api'),
     # home SPA
     #path('spa/', views.spa, name='spa_html'),
     # all areas
