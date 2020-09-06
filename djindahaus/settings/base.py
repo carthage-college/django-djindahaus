@@ -77,7 +77,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     # apps
-    #'djindahaus.core',
+    'djindahaus.core',
     # needed for template tags
     'djtools',
     # honeypot for admin attacks
