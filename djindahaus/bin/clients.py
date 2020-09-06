@@ -1,7 +1,10 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import django
 import sys
+
+django.setup()
 
 import requests
 import urllib3
