@@ -12,6 +12,7 @@ class Client(object):
     def __init__(self):
         """Initialisation for variables used throughout."""
         self.base_url = settings.INDAHAUS_API_EARL
+        self.domains = settings.INDAHAUS_RF_DOMAINS
         self.clients_endpoint = '{0}/{1}/{2}/{3}'.format(
             settings.INDAHAUS_API_EARL,
             settings.INDAHAUS_ENDPOINT_STATS,
@@ -68,3 +69,16 @@ class Client(object):
         )
         jason = response.json()
         return jason.get('data')
+
+    def get_capacity(self, domain):
+        capacity = 0
+        for dom in self.domains:
+            if dom['id'] == domain:
+                capacity = dom['capacity']
+                break
+            elif dom['areas']:
+                for area in dom['areas']:
+                    if area['id'] == domain:
+                        capacity = area['capacity']
+                        break
+        return capacity
