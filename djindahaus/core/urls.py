@@ -11,6 +11,7 @@ from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from djauth.views import loggedout
 from djindahaus.core import views
+from djindahaus.core.api import clients
 
 admin.autodiscover()
 
@@ -58,7 +59,7 @@ urlpatterns = [
     ),
     # rest
     #path('clients/all/', views.spa, name='spa_json'),
-    path('clients/<str:domain>/', views.home, name='clients_api'),
+    path('clients/<str:domain>/', clients, name='clients'),
     # home SPA
     #path('spa/', views.spa, name='spa_html'),
     # all areas
