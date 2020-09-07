@@ -116,13 +116,27 @@ def dining(request):
     caf.okupa = client.get_okupa(caf, token)
     if caf.okupa:
         caf.percent = round(caf.okupa / caf.capacity * 100)
+    else:
+        caf.percent = 0
     stu = Area.objects.get(rf_domain='Student_Center')
     stu.okupa = client.get_okupa(stu, token)
     if stu.okupa:
         stu.percent = round(stu.okupa / stu.capacity * 100)
+    else:
+        stu.percent = 0
+    byt = Area.objects.get(rf_domain='Donna_Bytes')
+    byt.okupa = client.get_okupa(byt, token)
+    if byt.okupa:
+        byt.percent = round(byt.okupa / byt.capacity * 100)
+    else:
+        byt.percent = 0
     # sign out
     client.destroy_token(token)
-    return render(request, 'dining.html', {'caf': caf, 'stu': stu})
+    return render(
+        request,
+        'dining.html',
+        {'caf': caf, 'stu': stu, 'byt': byt},
+    )
 
 
 @csrf_exempt

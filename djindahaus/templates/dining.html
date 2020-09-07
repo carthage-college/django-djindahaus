@@ -6,12 +6,12 @@
 {% block extra_style %}
 {{block.super}}
 <style>
-#dining h1 {text-align:center;font-size:6rem;}
+#dining h1 {text-align:center;font-size:3rem;}
 </style>
 {% endblock %}
 {% block content %}
 <div id="dining" class="row">
-  <div class="d-flex justify-content-center col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+  <div class="d-flex justify-content-center col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
     <div class="p-2">
           <h1{% if user.is_superuser %} title="occupied: {{stu.okupa}} | {{stu.capacity}} | {{stu.percent}}"{% endif %}>
           Student Union
@@ -26,10 +26,9 @@
             </div>
           </div>
     </div>
-    <!-- /.row -->
   </div>
   <!-- /.col-* -->
-  <div class="d-flex justify-content-center col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+  <div class="d-flex justify-content-center col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
     <div class="p-2">
           <h1{% if user.is_superuser %} title="occupied: {{caf.okupa}} | {{caf.capacity}} | {{caf.percent}}"{% endif %}>
           Cafeteria
@@ -44,7 +43,23 @@
             </div>
           </div>
     </div>
-    <!-- /.row -->
+  </div>
+  <!-- /.col-* -->
+  <div class="d-flex justify-content-center col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+    <div class="p-2">
+          <h1{% if user.is_superuser %} title="occupied: {{byt.okupa}} | {{byt.capacity}} | {{byt.percent}}"{% endif %}>
+              Donna's Bytes
+          </h1>
+          <div class="c100 big p{% if byt.percent <= 10 %}10{% else %}{{byt.percent}}{% endif %}">
+            <span>
+            {% if byt.percent <= 10 %}&lt; 10{% else %}{{byt.percent}}{% endif %}%
+            </span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+    </div>
   </div>
   <!-- /.col-* -->
 </div>
