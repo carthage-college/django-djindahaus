@@ -78,7 +78,7 @@ def main():
                                     pids.append(pid)
                                     if settings.DEBUG:
                                         print(
-                                            'domain AP = {0}/{1}'.format(ap, pid),
+                                            'domain AP = {0} / {1}'.format(ap, pid),
                                         )
                                 # check for areas within a domain
                                 if domains[idx]['areas']:

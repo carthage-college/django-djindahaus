@@ -82,3 +82,53 @@ class Client(object):
                         capacity = area['capacity']
                         break
         return capacity
+
+    def get_okupa(self, area, token):
+        okupa = None
+        if area.parent:
+            devices = self.get_devices(area.parent.rf_domain, token)
+            area.pids = []
+        else:
+            devices = self.get_devices(area.rf_domain, token)
+
+        headers = {
+            'accept': 'application/json', 'Authorization': self.get_token_nac(),
+        }
+        pids = []
+        for device_wap in devices:
+            ap = device_wap['ap']
+            mac = device_wap['mac'].replace('-', ':')
+            url = '{0}{1}/{2}'.format(
+                settings.PACKETFENCE_API_EARL,
+                settings.PACKETFENCE_NODE_ENDPOINT,
+                mac,
+            )
+            response = requests.get(url=url, headers=headers, verify=False)
+            device_nac = response.json()
+            if response.status_code != 404:
+                for key, _ in device_nac['item'].items():
+                    if key == 'pid':
+                        pid = device_nac['item'][key].lower()
+                        # some folks are registered with their username
+                        # and their email address for some reason.
+                        if '@{0}'.format(settings.LDAP_EMAIL_DOMAIN) in pid:
+                            pid = pid.split('@')[0]
+                        status = (
+                            pid not in settings.INDAHAUS_XCLUDE and
+                            'host/' not in pid and
+                            'carthage\\' not in pid
+                        )
+                        if status:
+                            if pid not in pids:
+                                pids.append(pid)
+                                # check for areas within a domain
+                            if area.parent:
+                                if ap in area.access_points:
+                                    if pid not in area.pids:
+                                        area.pids.append(pid)
+        if area.parent:
+            okupa = len(area.pids)
+        else:
+            okupa = len(pids)
+
+        return okupa

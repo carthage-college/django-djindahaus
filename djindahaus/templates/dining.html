@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% block extra_style %}
+{{block.super}}
+<style>
+#dining h1 {text-align:center;font-size:6rem;}
+</style>
+{% endblock %}
+{% block content %}
+<div id="dining" class="row">
+  <div class="d-flex justify-content-center col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+    <div class="p-2">
+          <h1{% if user.is_superuser %} title="occupied: {{stu.okupa}} | {{stu.capacity}} | {{stu.percent}}"{% endif %}>
+          Student Union
+          </h1>
+          <div class="c100 big p{% if stu.percent <= 10 %}10{% else %}{{stu.percent}}{% endif %}">
+            <span>
+            {% if stu.percent <= 10 %}&lt; 10{% else %}{{stu.percent}}{% endif %}%
+            </span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.col-* -->
+  <div class="d-flex justify-content-center col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+    <div class="p-2">
+          <h1{% if user.is_superuser %} title="occupied: {{caf.okupa}} | {{caf.capacity}} | {{caf.percent}}"{% endif %}>
+          Cafeteria
+          </h1>
+          <div class="c100 big p{% if caf.percent <= 10 %}10{% else %}{{caf.percent}}{% endif %}">
+            <span>
+            {% if caf.percent <= 10 %}&lt;< 10{% else %}{{caf.percent}}{% endif %}%
+            </span>
+            <div class="slice">
+              <div class="bar"></div>
+              <div class="fill"></div>
+            </div>
+          </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.col-* -->
+</div>
+<!-- /#app -->
+{% endblock %}
+{% block footer %}{% endblock %}

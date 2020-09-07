@@ -13,6 +13,7 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from djimix.decorators.auth import portal_auth_required
 from djindahaus.core.manager import Client
+from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
@@ -105,6 +106,23 @@ def home(request):
 def spa(request):
     """Display all clients for all domain controllers in standard HTML."""
     return render(request, 'spa.html', {})
+
+
+def dining(request):
+    """Display dining areas."""
+    client = Client()
+    token = client.get_token()
+    caf = Area.objects.get(rf_domain='Cafeteria')
+    caf.okupa = client.get_okupa(caf, token)
+    if caf.okupa:
+        caf.percent = round(caf.okupa / caf.capacity * 100)
+    stu = Area.objects.get(rf_domain='Student_Center')
+    stu.okupa = client.get_okupa(stu, token)
+    if stu.okupa:
+        stu.percent = round(stu.okupa / stu.capacity * 100)
+    # sign out
+    client.destroy_token(token)
+    return render(request, 'dining.html', {'caf': caf, 'stu': stu})
 
 
 @csrf_exempt

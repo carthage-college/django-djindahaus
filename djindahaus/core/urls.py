@@ -60,6 +60,8 @@ urlpatterns = [
     # rest
     #path('clients/all/', views.spa, name='spa_json'),
     path('clients/<str:domain>/', clients, name='clients'),
+    # dining
+    path('dining/', views.dining, name='dining'),
     # home SPA
     #path('spa/', views.spa, name='spa_html'),
     # all areas

@@ -8,9 +8,11 @@ import requests
 import urllib3
 from django.conf import settings
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from djimix.decorators.auth import portal_auth_required
 from djindahaus.core.manager import Client
+from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
@@ -95,50 +97,17 @@ def spa(request):
     )
 
 
-def clients(request, domain, area=False):
+def clients(request, domain):
     """Display all clients given a domain controller identifier."""
+    area = get_object_or_404(Area, rf_domain=domain)
     client = Client()
     token = client.get_token()
-    devices = client.get_devices(domain, token)
-    capacity = 0
-    okupa = 0
-    percent = 0
-    pids = []
-    if devices:
-        # auth token from NAC
-        headers = {
-            'accept': 'application/json', 'Authorization': client.get_token_nac(),
-        }
-        for device_wap in devices:
-            mac = device_wap['mac'].replace('-', ':')
-            url = '{0}{1}/{2}'.format(
-                settings.PACKETFENCE_API_EARL,
-                settings.PACKETFENCE_NODE_ENDPOINT,
-                mac,
-            )
-            response = requests.get(url=url, headers=headers, verify=False)
-            device_nac = response.json()
-            if response.status_code != 404:
-                for key, _ in device_nac['item'].items():
-                    if key == 'pid':
-                        pid = device_nac['item'][key].lower()
-                        # some folks are registered with their username
-                        # and their email address for some reason.
-                        if '@{0}'.format(settings.LDAP_EMAIL_DOMAIN) in pid:
-                            pid = pid.split('@')[0]
-                        status = (
-                            pid not in settings.INDAHAUS_XCLUDE and
-                            'host/' not in pid and
-                            'carthage\\' not in pid
-                        )
-                        if status:
-                            if pid not in pids:
-                                pids.append(pid)
-        okupa = len(pids)
-        capacity = client.get_capacity(domain)
-        percent = round(okupa / capacity * 100)
-
+    okupa = client.get_okupa(area, token)
+    capacity = client.get_capacity(area.rf_domain)
     # sign out
     client.destroy_token(token)
+    percent = 0
+    if okupa:
+        percent = round(okupa / capacity * 100)
     jason = json.dumps({'capacity': capacity, 'okupa': okupa, 'percent': percent})
     return HttpResponse(jason, content_type='text/plain; charset=utf-8')
