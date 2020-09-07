@@ -1,4 +1,8 @@
 {% extends "home.html" %}
+{% block meta %}
+{{block.super}}
+<meta http-equiv="refresh" content="30">
+{% endblock %}
 {% block extra_style %}
 {{block.super}}
 <style>
