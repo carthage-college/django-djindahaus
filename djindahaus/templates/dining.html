@@ -6,11 +6,13 @@
 {% block extra_style %}
 {{block.super}}
 <style>
-#dining h1 {text-align:center;font-size:3rem;}
+#dining h1 {text-align:center;font-size:4rem;}
 </style>
 {% endblock %}
+{% block container %} class="mb-4"{% endblock %}
 {% block content %}
-<div id="dining" class="row">
+<h1 class="clear" style="padding-bottom:12px;font-size:6rem; background-color:#efefef;text-align:center;">Dining Occupancy Around Campus</h1>
+<div id="dining" class="row mt-4">
   <div class="d-flex justify-content-center col-4 col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
     <div class="p-2">
           <h1{% if user.is_superuser %} title="occupied: {{stu.okupa}} | {{stu.capacity}} | {{stu.percent}}"{% endif %}>
