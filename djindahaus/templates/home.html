@@ -9,6 +9,8 @@
  .domain-pids {display:inline-block;width:42px;margin-top:3px;}
  .domain-name {font-size: 1.70em;}
  body.sidenav-toggled footer.sticky-footer {width: 100%;}
+ .c100.p100 > .slice > .bar {border: 0.08em solid red;}
+ .c100.p100 > .slice > .fill {border: 0.08em solid red;}
 </style>
 {% endblock %}
 {% block navigation %}{% endblock %}
@@ -24,7 +26,7 @@
           <i class="fa fa-angle-right" aria-hidden="true"></i>
           {{domain.name}}
           </span>
-          <div class="c100 small float-right p{% if domain.percent <= 10 %}10{% else %}{{domain.percent}}{% endif %}">
+          <div class="c100 small float-right p{% if domain.percent <= 10 %}10{% else %}{% if domain.percent >= 100 %}100{% else %}{{domain.percent}}{% endif %}{% endif %}">
             <span>
             {% if domain.percent <= 10 %}< 10{% else %}{{domain.percent}}{% endif %}%
             </span>
@@ -49,7 +51,7 @@
             {% endif %}
             {{area.name}}
             </span>
-            <div class="c100 small float-right p{% if area.percent <= 10 %}10{% else %}{{area.percent}}{% endif %}">
+            <div class="c100 small float-right p{% if area.percent <= 10 %}10{% else %}{% if area.percent >= 100 %}100{% else %}{{area.percent}}{% endif %}{% endif %}">
               <span>
                 {% if area.percent <= 10 %}< 10{% else %}{{area.percent}}{% endif %}%
               </span>
