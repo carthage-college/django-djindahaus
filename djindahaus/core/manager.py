@@ -70,9 +70,10 @@ class Client(object):
                 data=json.dumps({'rf-domain': domain}),
                 verify=False,
             )
-            jason = response.json()
-            devices = jason.get('data')
-            cache.set(domain, devices, settings.INDAHAUS_CACHE_TIMEOUT)
+            if response.status_code == 200:
+                jason = response.json()
+                devices = jason.get('data')
+                cache.set(domain, devices, settings.INDAHAUS_CACHE_TIMEOUT)
 
         return devices
 
