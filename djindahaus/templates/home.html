@@ -28,7 +28,13 @@
           </span>
           <div class="c100 small float-right p{% if domain.percent <= 10 %}10{% else %}{% if domain.percent >= 100 %}100{% else %}{{domain.percent}}{% endif %}{% endif %}">
             <span>
-            {% if domain.percent <= 10 %}< 10{% else %}{{domain.percent}}{% endif %}%
+            {% if domain.percent <= 10 %}
+              &lt; 10%
+            {% else %}{% if domain.percent >= 90 %}
+              &gt; 90%
+            {% else %}
+              {{domain.percent}}%
+            {% endif %}
             </span>
             <div class="slice">
               <div class="bar"></div>
@@ -53,7 +59,13 @@
             </span>
             <div class="c100 small float-right p{% if area.percent <= 10 %}10{% else %}{% if area.percent >= 100 %}100{% else %}{{area.percent}}{% endif %}{% endif %}">
               <span>
-                {% if area.percent <= 10 %}< 10{% else %}{{area.percent}}{% endif %}%
+              {% if area.percent <= 10 %}
+                &lt; 10%
+              {% else %}{% if area.percent >= 90 %}
+                &gt; 90%
+              {% else %}
+                {{area.percent}}%
+              {% endif %}
               </span>
               <div class="slice">
                 <div class="bar"></div>
