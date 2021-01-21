@@ -181,7 +181,7 @@ ERROR_LOG_FILENAME = '{0}{1}'.format(LOG_FILEPATH, 'error.log')
 CUSTOM_LOG_FILENAME = '{0}{1}'.format(LOG_FILEPATH, 'custom.log')
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s',
@@ -219,7 +219,7 @@ LOGGING = {
         },
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
+            # 'filters': ['require_debug_false'],
             'include_html': True,
             'class': 'django.utils.log.AdminEmailHandler',
         },
