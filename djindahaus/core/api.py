@@ -10,7 +10,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 from djindahaus.core.manager import Client
 from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning

@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
-from djimix.decorators.auth import portal_auth_required
+from djauth.decorators import portal_auth_required
 from djindahaus.core.manager import Client
 from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
