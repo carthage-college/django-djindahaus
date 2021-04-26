@@ -226,7 +226,6 @@ LOGGING = {
     'loggers': {
         'custom_logfile': {
             'level':'ERROR',
-            'filters': ['require_debug_true'], # do not run error logger in production
             'class': 'logging.FileHandler',
             'filename': CUSTOM_LOG_FILENAME,
             'formatter': 'custom',
@@ -236,7 +235,6 @@ LOGGING = {
             'class':'logging.handlers.RotatingFileHandler',
             'backupCount': 10,
             'maxBytes': 50000,
-            'filters': ['require_debug_false'], # run logger in production
             'filename': INFO_LOG_FILENAME,
             'formatter': 'simple',
         },
@@ -248,7 +246,6 @@ LOGGING = {
         },
         'error_logfile': {
             'level': 'ERROR',
-            'filters': ['require_debug_true'], # do not run error logger in production
             'class': 'logging.FileHandler',
             'filename': ERROR_LOG_FILENAME,
             'formatter': 'verbose'
