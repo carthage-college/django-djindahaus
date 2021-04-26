@@ -113,7 +113,7 @@ class Client(object):
                 )
                 response = requests.get(url=url, headers=headers, verify=False)
                 device_nac = response.json()
-                if response.status_code != 404:
+                if response.status_code != 404 and response.status_code != 502:
                     for key, _ in device_nac['item'].items():
                         if key == 'pid':
                             pid = device_nac['item'][key].lower()
