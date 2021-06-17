@@ -1,4 +1,4 @@
-django==2.2.14
+django==2.2.24
 django-admin-honeypot==1.1.0
 django-bootstrap4==2.2.0
 django-loginas==0.3.8
