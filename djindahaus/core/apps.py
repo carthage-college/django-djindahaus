@@ -6,4 +6,5 @@ from django.apps import AppConfig
 class CoreConfig(AppConfig):
     """Application configuration for this module."""
 
-    name = 'core'
+    name = 'djindahaus.core'
+    verbose_name = 'Indahaus Core'

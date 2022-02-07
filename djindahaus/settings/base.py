@@ -68,7 +68,7 @@ DATABASES = {
     },
 }
 INSTALLED_APPS = (
-    'bootstrap4',
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,14 +77,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     # apps
+    #'djindahaus.core.apps.CoreConfig',
     'djindahaus.core',
-    # needed for template tags
-    'djtools',
-    # honeypot for admin attacks
+    # third party
     'admin_honeypot',
-    # sign in as a user
+    'bootstrap4',
+    'djtools',
     'loginas',
-    # tagging package
     'taggit',
 )
 MIDDLEWARE = (
