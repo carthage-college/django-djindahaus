@@ -114,7 +114,8 @@ def main():
                     cap = domains[idx]['areas'][aid]['capacity']
                     print('capacity = {0}'.format(round(count / cap * 100)))
             print('----------------------------')
-
+        else:
+            print('domain fail = {0}'.format(domain))
     # destory client otherwise we max out the number of connections allowed
     # to the API
     client.destroy_token(token)
