@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import json
-
+import logging
 import requests
 from django.conf import settings
 from django.core.cache import cache
+
+
+logger = logging.getLogger('debug_logfile')
 
 
 class Client(object):
@@ -74,6 +77,8 @@ class Client(object):
                 jason = response.json()
                 devices = jason.get('data')
                 cache.set(domain, devices, settings.INDAHAUS_CACHE_TIMEOUT)
+            else:
+                logger.debug(response.__dict__)
 
         return devices
 
