@@ -18,9 +18,17 @@
           <h1{% if user.is_superuser %} title="occupied: {{stu.okupa}} | {{stu.capacity}} | {{stu.percent}}"{% endif %}>
           Student Union
           </h1>
+          {% if user.is_superuser %}
+          <div class="c100 big p{{stu.percent}}">
+          {% else %}
           <div class="c100 big p{% if stu.percent <= 10 %}10{% else %}{{stu.percent}}{% endif %}">
+          {% endif %}
             <span>
+            {% if user.is_superuser %}
+            {{stu.percent}}%
+            {% else %}
             {% if stu.percent <= 10 %}&lt; 10{% else %}{{stu.percent}}{% endif %}%
+            {% endif %}
             </span>
             <div class="slice">
               <div class="bar"></div>
@@ -35,9 +43,17 @@
           <h1{% if user.is_superuser %} title="occupied: {{caf.okupa}} | {{caf.capacity}} | {{caf.percent}}"{% endif %}>
           Cafeteria
           </h1>
+          {% if user.is_superuser %}
+          <div class="c100 big p{{caf.percent}}">
+          {% else %}
           <div class="c100 big p{% if caf.percent <= 10 %}10{% else %}{{caf.percent}}{% endif %}">
+          {% endif %}
             <span>
+            {% if user.is_superuser %}
+            {{caf.percent}}%
+            {% else %}
             {% if caf.percent <= 10 %}&lt; 10{% else %}{{caf.percent}}{% endif %}%
+            {% endif %}
             </span>
             <div class="slice">
               <div class="bar"></div>
@@ -52,9 +68,17 @@
           <h1{% if user.is_superuser %} title="occupied: {{byt.okupa}} | {{byt.capacity}} | {{byt.percent}}"{% endif %}>
               Donna's Bytes
           </h1>
+          {% if user.is_superuser %}
+          <div class="c100 big p{{byt.percent}}">
+          {% else %}
           <div class="c100 big p{% if byt.percent <= 10 %}10{% else %}{{byt.percent}}{% endif %}">
+          {% endif %}
             <span>
+            {% if user.is_superuser %}
+            {{byt.percent}}%
+            {% else %}
             {% if byt.percent <= 10 %}&lt; 10{% else %}{{byt.percent}}{% endif %}%
+            {% endif %}
             </span>
             <div class="slice">
               <div class="bar"></div>
