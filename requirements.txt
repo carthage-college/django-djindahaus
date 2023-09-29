@@ -10,4 +10,5 @@ cryptography
 pyodbc
 python-ldap
 python-memcached
+pymemcache
 requests
