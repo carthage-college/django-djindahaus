@@ -1,7 +1,5 @@
 django==4.2.5
-django-admin-honeypot
 django-bootstrap4
-django-loginas
 django-taggit
 bootstrap_admin
 mysqlclient
