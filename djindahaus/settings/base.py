@@ -57,6 +57,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
 )
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
@@ -80,10 +81,7 @@ INSTALLED_APPS = (
     #'djindahaus.core.apps.CoreConfig',
     'djindahaus.core',
     # third party
-    #'admin_honeypot',
-    'bootstrap4',
     'djtools',
-    'loginas',
     'taggit',
 )
 MIDDLEWARE = (

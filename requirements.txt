@@ -1,5 +1,6 @@
 django==4.2.9
 django-bootstrap4
+django-loginas
 django-taggit
 bootstrap_admin
 mysqlclient
