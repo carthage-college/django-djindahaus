@@ -7,10 +7,10 @@ import json
 import requests
 import urllib3
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from djauth.decorators import portal_auth_required
 from djindahaus.core.manager import Client
 from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -20,10 +20,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-@portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
-    redirect_url=reverse_lazy('access_denied'),
-)
+@login_required
 def spa(request):
     """Display all clients for all domain controllers for SPA."""
     client = Client()

@@ -6,13 +6,13 @@ import datetime
 import requests
 import urllib3
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
-from djauth.decorators import portal_auth_required
 from djindahaus.core.manager import Client
 from djindahaus.core.models import Area
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -22,10 +22,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-@portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
-    redirect_url=reverse_lazy('access_denied'),
-)
+@login_required
 def home(request):
     """Display all clients for all domain controllers."""
     client = Client()
@@ -100,10 +97,7 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-@portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
-    redirect_url=reverse_lazy('access_denied'),
-)
+@login_required
 def spa(request):
     """Display all clients for all domain controllers in standard HTML."""
     return render(request, 'spa.html', {})
@@ -149,11 +143,7 @@ def dining(request):
 
 
 @csrf_exempt
-@portal_auth_required(
-    session_var='DJINDAHAUS_AUTH',
-    redirect_url=reverse_lazy('access_denied'),
-    group='carthageStaffStatus',
-)
+@login_required
 def clear_cache(request, ctype='blurb'):
     """Clear the cache for API content."""
     if request.is_ajax() and request.method == 'POST':
