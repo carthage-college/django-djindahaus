@@ -1,6 +1,7 @@
-django==4.2.10
+django==4.2.11
 django-bootstrap4
 django-loginas
+django-gmailapi-json-backend
 django-taggit
 bootstrap_admin
 mysqlclient
