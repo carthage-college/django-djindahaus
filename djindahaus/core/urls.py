@@ -48,6 +48,8 @@ urlpatterns = [
         TemplateView.as_view(template_name='denied.html'),
         name='access_denied',
     ),
+    #path('saml/', include('django_saml.urls')),
+    #path('saml/metadata/', views.metadata, name='metadata'),
     # django admin and loginas
     path('rocinante/', include('loginas.urls')),
     path('rocinante/', admin.site.urls),

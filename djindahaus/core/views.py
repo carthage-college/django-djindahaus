@@ -15,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 from djindahaus.core.manager import Client
 from djindahaus.core.models import Area
+from onelogin.saml2.settings import OneLogin_Saml2_Settings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
@@ -165,3 +166,20 @@ def clear_cache(request, ctype='blurb'):
         body = "Requires AJAX POST"
 
     return HttpResponse(body, content_type='text/plain; charset=utf-8')
+
+
+def metadata(request):
+    # req = prepare_django_request(request)
+    # auth = init_saml_auth(req)
+    # saml_settings = auth.get_settings()
+    saml_settings = OneLogin_Saml2_Settings(settings=None, custom_base_path=settings.SAML_FOLDER, sp_validation_only=True)
+    metadata = saml_settings.get_sp_metadata()
+    errors = saml_settings.validate_metadata(metadata)
+
+    return HttpResponse(content=metadata, content_type='text/xml')
+
+    #if len(errors) == 0:
+    #    resp = HttpResponse(content=metadata, content_type='text/xml')
+    #else:
+    #    resp = HttpResponseServerError(content=', '.join(errors))
+    #return resp
